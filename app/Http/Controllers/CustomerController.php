@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        Inertia::render('Category/create');
     }
 
     /**
@@ -28,7 +28,13 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->validate([
+            'first_name' => ['required', 'max:50'],
+            'last_name' => ['required', 'max:50'],
+            'email' => ['required', 'max:50', 'email'],
+          ]));
+  
+          return to_route('users.index');
     }
 
     /**
